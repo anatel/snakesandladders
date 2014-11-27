@@ -51,11 +51,11 @@ function isItCompPlayerTurn()
                     isItMyTurn = false;
                     setTimeout(function() {
                         diceRes = 0;
-                        if (amIIn){
-                        $(".dice").css('background-image', 'url(\'images/wait.gif\')');
-                        $(".currPlayer").html('<label class="currenPlayerLabel">Current Player: <br><span class="currPlayerName">' + currPlayerName + '</span></label><img src="images/computerPlayerPics/comp' + currPlayerID + '.png" class="currPlayerPic">');
-                        playTurn(0); 
-                    }
+                        if (amIIn) {
+                            $(".dice").css('background-image', 'url(\'images/wait.gif\')');
+                            $(".currPlayer").html('<label class="currenPlayerLabel">Current Player: <br><span class="currPlayerName">' + currPlayerName + '</span></label><img src="images/computerPlayerPics/comp' + currPlayerID + '.png" class="currPlayerPic">');
+                            playTurn(0);
+                        }
                     }, 2000);
                     isCompPlayed = true;
                 }
@@ -197,32 +197,32 @@ function hasPlayerLeft() {
                 currPlayerType = r.nextPlayerType;
                 if (!r.isItPlayerSessionTurn)
                 {
-                    if (currPlayerType == "HUMAN"&& !r.isThereWinner)
+                    if (currPlayerType == "HUMAN" && !r.isThereWinner)
                     {
                         $(".currPlayer").html('<label class="currenPlayerLabel">Current Player: <br><span class="currPlayerName">' + currPlayerName + '</span></label><img src="images/humanPlayerPics/human' + currPlayerID + 'big.png" class="currPlayerPic">');
                     }
                 }
                 setTimeout(function() {
                     $("#gameStatus").slideUp();
-                    if (r.isThereWinner&& !r.didILeave ) {
+                    if (r.isThereWinner && !r.didILeave) {
                         window.location.href = "winner.html";
                     }
                 }, 1500);
                 $("[class='soldier'][data-owner=" + r.playerLeftID + "]").remove();
 
-                if (r.isItPlayerSessionTurn&& !isItMyTurn) {
+                if (r.isItPlayerSessionTurn && !isItMyTurn) {
                     isItMyTurn = true;
                     initComponentsForNewTurn();
                 }
-                else if(r.didILeave){
+                else if (r.didILeave) {
                     amIIn = false;
                     $('body').append("<div class='disableGame'><dive class='sessionTimeout'><br><br>Your session has timed out, you left the game :(<br><br><a href='index.html'>Return to home page...</a></div></div>");
                     clearInterval(playersInterval);
                     clearInterval(compTurnInterval);
                     clearInterval(playerLeftInterval);
-                    clearInterval(turnDataInterval);   
+                    clearInterval(turnDataInterval);
                     Object.freeze(document.body);
-                }                
+                }
             }
         }
     });
@@ -236,7 +236,7 @@ function ajaxJoinedPlayerList() {
             //gameStarted:
             if (r.howManyLeftToJoin == 0 && !isGameStarted) {
                 isGameStarted = true;
-                 compTurnInterval = setInterval(isItCompPlayerTurn, 1000);
+                compTurnInterval = setInterval(isItCompPlayerTurn, 1000);
                 if (!isFirstHumanPlayed) {
                     if (currPlayerType == "HUMAN") {
                         isFirstHumanPlayed = true;
@@ -379,10 +379,11 @@ function getJoinedPlayersSoldierLocation() {
     return false;
 }
 
+
 $(function()
 {
     $.ajaxSetup({cache: false});
-     playersInterval = setInterval(ajaxJoinedPlayerList, refreshRate);
+    playersInterval = setInterval(ajaxJoinedPlayerList, refreshRate);
     getGameInfo();
     $("#arrow").hide();
     $("#gameStatus").hide();
@@ -468,7 +469,7 @@ function moveSoldier(turnData, soldierID) {
     var topOffset = 0;
     var destCell = +turnData.turnData.turnDest;
     var clickedSoldier = $("[class='soldier'][data-id=" + soldierID + "][data-owner=" + turnData.currPlayerID + "]");
-    
+
     if (clickedSoldier.length == 0) {//for comp player
         clickedSoldier = $("[class='soldier'][data-owner=" + turnData.currPlayerID + "][data-cell=" + turnData.turnData.sourceCell + "]");
     }
