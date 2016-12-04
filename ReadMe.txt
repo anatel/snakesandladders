@@ -1,5 +1,5 @@
 *** Snakes & Ladders ***
-You can play this game on Amazon:
+You can play this game here:
 http://188.166.163.85:8080/Snakes_And_Ladders
 
 The game is mainly supported by Chrome Browser.
